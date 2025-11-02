@@ -9,6 +9,7 @@ import {
   type ViewType,
 } from "./asana-header-exact";
 import { AsanaSidebar } from "./asana-sidebar";
+import { AsanaTopNav } from "./asana-top-nav";
 
 type AsanaLayoutProps = {
   children: React.ReactNode;
@@ -39,33 +40,42 @@ export function AsanaLayout({
   onSortChange,
   onGroupChange,
 }: AsanaLayoutProps) {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   return (
-    <div className="flex h-screen overflow-hidden bg-[#F6F7F8]">
-      {/* Sidebar */}
-      <AsanaSidebar
-        currentProjectId={currentProjectId}
-        currentWorkspaceId={currentWorkspaceId}
-        onNavigate={onNavigate}
-      />
+    <div className="flex h-screen flex-col overflow-hidden bg-[#F6F7F8]">
+      {/* Top Navigation Bar */}
+      <AsanaTopNav onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)} />
 
-      {/* Main Content */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Header */}
-        <AsanaHeaderExact
-          currentView={currentView}
-          onCustomize={onCustomize}
-          onFilterChange={onFilterChange}
-          onGroupChange={onGroupChange}
-          onShare={onShare}
-          onSortChange={onSortChange}
-          onViewChange={onViewChange}
-          title={title}
-        />
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        {!sidebarCollapsed && (
+          <AsanaSidebar
+            currentProjectId={currentProjectId}
+            currentWorkspaceId={currentWorkspaceId}
+            onNavigate={onNavigate}
+          />
+        )}
 
-        {/* Content Area */}
-        <main className="flex-1 overflow-auto" data-testid="content-area">
-          {children}
-        </main>
+        {/* Main Content */}
+        <div className="flex flex-1 flex-col overflow-hidden">
+          {/* Header */}
+          <AsanaHeaderExact
+            currentView={currentView}
+            onCustomize={onCustomize}
+            onFilterChange={onFilterChange}
+            onGroupChange={onGroupChange}
+            onShare={onShare}
+            onSortChange={onSortChange}
+            onViewChange={onViewChange}
+            title={title}
+          />
+
+          {/* Content Area */}
+          <main className="flex-1 overflow-auto" data-testid="content-area">
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   );

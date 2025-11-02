@@ -96,6 +96,7 @@ export default function HomePage({ params }: PageParams) {
   return (
     <AsanaLayout
       currentView="list"
+      currentWorkspaceId={workspaceId}
       onCustomize={handleCustomize}
       onNavigate={handleNavigate}
       onShare={handleShare}

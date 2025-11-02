@@ -8,7 +8,7 @@ import SignUpForm from "@/components/sign-up-form";
 function LoginPageContent() {
   const [showSignIn, setShowSignIn] = useState(false);
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirect") || "/dashboard";
+  const redirectTo = searchParams.get("redirect") || "/0/1132775624246007/home";
 
   return showSignIn ? (
     <SignInForm

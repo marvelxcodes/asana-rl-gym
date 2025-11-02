@@ -53,52 +53,15 @@ export function AsanaSidebar({
 
   return (
     <aside
-      className="flex h-screen w-60 flex-col bg-[#2D2E2F]"
+      className="flex h-full w-60 flex-col bg-[#2D333A]"
       data-testid="asana-sidebar"
     >
-      {/* Create Button */}
-      <div className="p-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="h-9 w-full justify-start gap-2 bg-[#F06A6A] text-sm font-medium text-white hover:bg-[#E55A5A] active:bg-[#D64A4A]"
-              data-testid="create-button"
-            >
-              <Plus className="h-4 w-4" />
-              Create
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-48">
-            <DropdownMenuItem className="gap-3 py-2">
-              <CheckSquare className="h-4 w-4" />
-              <span>Task</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="gap-3 py-2">
-              <FolderKanban className="h-4 w-4" />
-              <span>Project</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="gap-3 py-2">
-              <MessageSquare className="h-4 w-4" />
-              <span>Message</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="gap-3 py-2">
-              <LayoutGrid className="h-4 w-4" />
-              <span>Portfolio</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="gap-3 py-2">
-              <Goal className="h-4 w-4" />
-              <span>Goal</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-
       {/* Main Navigation */}
-      <nav className="flex-1 overflow-y-auto px-2">
+      <nav className="flex-1 overflow-y-auto px-2 pt-2">
         <div className="space-y-1 py-2">
           {navItems.map((item) => (
             <Link
-              className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-white transition-colors hover:bg-white/10"
+              className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-white transition-all duration-200 hover:bg-white/10 active:bg-white/20"
               data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
               href={item.href}
               key={item.label}
@@ -127,10 +90,10 @@ export function AsanaSidebar({
           </button>
 
           {insightsExpanded && (
-            <div className="mt-1 space-y-1">
+            <div className="mt-1 space-y-1 animate-in fade-in slide-in-from-top-2 duration-200">
               {insightItems.map((item) => (
                 <Link
-                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 pl-9 text-sm text-white transition-colors hover:bg-white/10"
+                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 pl-9 text-sm text-white transition-all duration-200 hover:bg-white/10 active:bg-white/20"
                   data-testid={`nav-${item.label.toLowerCase()}`}
                   href={item.href}
                   key={item.label}
