@@ -1,46 +1,22 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import { trpc } from "@/utils/trpc";
 
-const TITLE_TEXT = `
- ██████╗ ███████╗████████╗████████╗███████╗██████╗
- ██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
- ██████╔╝█████╗     ██║      ██║   █████╗  ██████╔╝
- ██╔══██╗██╔══╝     ██║      ██║   ██╔══╝  ██╔══██╗
- ██████╔╝███████╗   ██║      ██║   ███████╗██║  ██║
- ╚═════╝ ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-
- ████████╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ╚══██╔══╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
-    ██║       ███████╗   ██║   ███████║██║     █████╔╝
-    ██║       ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
-    ██║       ███████║   ██║   ██║  ██║╚██████╗██║  ██╗
-    ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
- `;
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-	const healthCheck = useQuery(trpc.healthCheck.queryOptions());
+  const router = useRouter();
 
-	return (
-		<div className="container mx-auto max-w-3xl px-4 py-2">
-			<pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
-			<div className="grid gap-6">
-				<section className="rounded-lg border p-4">
-					<h2 className="mb-2 font-medium">API Status</h2>
-					<div className="flex items-center gap-2">
-						<div
-							className={`h-2 w-2 rounded-full ${healthCheck.data ? "bg-green-500" : "bg-red-500"}`}
-						/>
-						<span className="text-sm text-muted-foreground">
-							{healthCheck.isLoading
-								? "Checking..."
-								: healthCheck.data
-									? "Connected"
-									: "Disconnected"}
-						</span>
-					</div>
-				</section>
-			</div>
-		</div>
-	);
+  useEffect(() => {
+    // Skip authentication, go directly to dashboard
+    router.push("/dashboard");
+  }, [router]);
+
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <h1 className="mb-4 font-bold text-2xl">Asana RL Training Environment</h1>
+        <p className="text-gray-600">Redirecting to dashboard...</p>
+      </div>
+    </div>
+  );
 }

@@ -1,0 +1,30 @@
+{
+  "scenario": "collaboration",
+  "description": "Optimized for team collaboration and communication tasks",
+  "weights": {
+    "taskCompletion": 8.0,
+    "efficiency": 6.0,
+    "timeToComplete": 2.0,
+    "userExperience": 8.0,
+    "errorRate": -4.0
+  },
+  "penalties": {
+    "invalidAction": -1.5,
+    "timeout": -3.0,
+    "error": -3.0,
+    "inefficiency": -2.0,
+    "overdue": -5.0
+  },
+  "bonuses": {
+    "fastCompletion": 1.0,
+    "perfectExecution": 3.0,
+    "helpfulAction": 5.0,
+    "innovation": 2.0
+  },
+  "thresholds": {
+    "fastCompletionTime": 45000,
+    "highEfficiencyRate": 0.75,
+    "maxErrorRate": 0.15,
+    "overdueThreshold": 2
+  }
+}

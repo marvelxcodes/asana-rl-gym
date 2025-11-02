@@ -1,0 +1,16 @@
+{
+  "task_completion_reward": 6.0,
+  "task_creation_reward": 5.0,
+  "task_assignment_reward": 2.0,
+  "project_creation_reward": 20.0,
+  "project_organization_reward": 8.0,
+  "quick_action_bonus": 0.5,
+  "workflow_efficiency_multiplier": 1.5,
+  "invalid_action_penalty": -1.5,
+  "timeout_penalty": -6.0,
+  "navigation_penalty": -0.15,
+  "comment_creation_reward": 2.0,
+  "team_interaction_bonus": 2.5,
+  "deadline_bonus_multiplier": 1.4,
+  "overdue_penalty_multiplier": 0.6
+}

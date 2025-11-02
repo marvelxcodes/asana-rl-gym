@@ -1,0 +1,30 @@
+{
+  "scenario": "projectCreation",
+  "description": "Optimized for project creation and setup tasks",
+  "weights": {
+    "taskCompletion": 15.0,
+    "efficiency": 8.0,
+    "timeToComplete": 5.0,
+    "userExperience": 3.0,
+    "errorRate": -3.0
+  },
+  "penalties": {
+    "invalidAction": -2.0,
+    "timeout": -10.0,
+    "error": -5.0,
+    "inefficiency": -2.0,
+    "overdue": -1.0
+  },
+  "bonuses": {
+    "fastCompletion": 5.0,
+    "perfectExecution": 10.0,
+    "helpfulAction": 2.0,
+    "innovation": 5.0
+  },
+  "thresholds": {
+    "fastCompletionTime": 60000,
+    "highEfficiencyRate": 0.9,
+    "maxErrorRate": 0.05,
+    "overdueThreshold": 0
+  }
+}

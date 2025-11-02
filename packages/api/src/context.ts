@@ -1,12 +1,16 @@
 import type { NextRequest } from "next/server";
-import { auth } from "@asana/auth";
 
+/**
+ * RL Training Environment Context
+ *
+ * Authentication is disabled for RL training purposes.
+ * All requests are treated as authenticated with a default user.
+ */
 export async function createContext(req: NextRequest) {
-	const session = await auth.api.getSession({
-		headers: req.headers,
-	});
+	// No authentication required for RL training
+	// Return empty context
 	return {
-		session,
+		session: null as null,
 	};
 }
 

@@ -1,0 +1,243 @@
+/**
+ * Automation-specific CSS styles for RL agent interaction
+ * Provides visual indicators and stable styling for automation elements
+ */
+
+/* Base automation styles */
+.automation-enabled {
+  --automation-highlight: #3b82f6;
+  --automation-success: #10b981;
+  --automation-error: #ef4444;
+  --automation-warning: #f59e0b;
+}
+
+/* Automation wrapper styles */
+.automation-wrapper {
+  position: relative;
+}
+
+.automation-wrapper[data-automation-state="active"] {
+  outline: 2px solid var(--automation-highlight);
+  outline-offset: 2px;
+}
+
+.automation-wrapper[data-automation-state="success"] {
+  outline: 2px solid var(--automation-success);
+  outline-offset: 2px;
+}
+
+.automation-wrapper[data-automation-state="error"] {
+  outline: 2px solid var(--automation-error);
+  outline-offset: 2px;
+}
+
+.automation-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Debug mode styles */
+.automation-debug .automation-wrapper::before {
+  content: attr(data-testid);
+  position: absolute;
+  top: -20px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  font-size: 10px;
+  border-radius: 3px;
+  z-index: 1000;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Stable element highlighting */
+[data-testid] {
+  position: relative;
+}
+
+.automation-debug [data-testid]:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid var(--automation-highlight);
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Task-specific automation styles */
+[data-testid^="task-card-"] {
+  transition: all 0.2s ease;
+}
+
+[data-testid^="task-card-"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-testid^="task-card-"][data-automation-state="dragging"] {
+  opacity: 0.7;
+  transform: rotate(5deg);
+}
+
+/* Kanban column automation styles */
+[data-testid^="kanban-column-"] {
+  transition: background-color 0.2s ease;
+}
+
+[data-testid^="kanban-column-"][data-automation-state="drop-target"] {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: var(--automation-highlight);
+}
+
+/* Form automation styles */
+[data-testid$="-input"]:focus {
+  outline: 2px solid var(--automation-highlight);
+  outline-offset: 2px;
+}
+
+[data-testid$="-button"] {
+  transition: all 0.2s ease;
+}
+
+[data-testid$="-button"]:hover {
+  transform: translateY(-1px);
+}
+
+[data-testid$="-button"][data-automation-state="loading"] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Navigation automation styles */
+[data-testid^="nav-"] {
+  transition: all 0.2s ease;
+}
+
+[data-testid^="nav-"].bg-accent {
+  border-left: 3px solid var(--automation-highlight);
+}
+
+/* Modal automation styles */
+[data-testid$="-modal"],
+[data-testid$="-dialog"] {
+  animation: automationModalEnter 0.3s ease;
+}
+
+@keyframes automationModalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Dropdown automation styles */
+[data-testid$="-dropdown-menu"] {
+  animation: automationDropdownEnter 0.2s ease;
+}
+
+@keyframes automationDropdownEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading state automation styles */
+[data-testid$="-loading"] {
+  animation: automationPulse 2s infinite;
+}
+
+@keyframes automationPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Error state automation styles */
+[data-testid$="-error"] {
+  border-left: 4px solid var(--automation-error);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Success state automation styles */
+[data-testid$="-success"] {
+  border-left: 4px solid var(--automation-success);
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Automation interaction tracking */
+.automation-interaction-highlight {
+  animation: automationInteractionPulse 0.5s ease;
+}
+
+@keyframes automationInteractionPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+/* Responsive automation styles */
+@media (max-width: 768px) {
+  .automation-debug .automation-wrapper::before {
+    display: none;
+  }
+}
+
+/* Print styles (hide automation elements) */
+@media print {
+  .automation-wrapper::before,
+  .automation-wrapper::after,
+  [data-testid$="-debug"] {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .automation-wrapper[data-automation-state="active"] {
+    outline-width: 3px;
+  }
+  
+  .automation-debug .automation-wrapper::before {
+    background: black;
+    color: white;
+    border: 1px solid white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .automation-wrapper,
+  [data-testid^="task-card-"],
+  [data-testid$="-button"],
+  [data-testid^="nav-"] {
+    transition: none;
+  }
+  
+  .automation-interaction-highlight {
+    animation: none;
+  }
+}

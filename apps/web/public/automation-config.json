@@ -1,0 +1,29 @@
+{
+  "scenario": "taskManagement",
+  "weights": {
+    "taskCompletion": 10.0,
+    "efficiency": 5.0,
+    "timeToComplete": 3.0,
+    "userExperience": 2.0,
+    "errorRate": -2.0
+  },
+  "penalties": {
+    "invalidAction": -1.0,
+    "timeout": -5.0,
+    "error": -2.0,
+    "inefficiency": -1.0,
+    "overdue": -3.0
+  },
+  "bonuses": {
+    "fastCompletion": 2.0,
+    "perfectExecution": 5.0,
+    "helpfulAction": 1.0,
+    "innovation": 3.0
+  },
+  "thresholds": {
+    "fastCompletionTime": 30000,
+    "highEfficiencyRate": 0.8,
+    "maxErrorRate": 0.1,
+    "overdueThreshold": 1
+  }
+}

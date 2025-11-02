@@ -1,15 +1,32 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import SignInForm from "@/components/sign-in-form";
 import SignUpForm from "@/components/sign-up-form";
-import { useState } from "react";
+
+function LoginPageContent() {
+  const [showSignIn, setShowSignIn] = useState(false);
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/dashboard";
+
+  return showSignIn ? (
+    <SignInForm
+      onSwitchToSignUp={() => setShowSignIn(false)}
+      redirectTo={redirectTo}
+    />
+  ) : (
+    <SignUpForm
+      onSwitchToSignIn={() => setShowSignIn(true)}
+      redirectTo={redirectTo}
+    />
+  );
+}
 
 export default function LoginPage() {
-	const [showSignIn, setShowSignIn] = useState(false);
-
-	return showSignIn ? (
-		<SignInForm onSwitchToSignUp={() => setShowSignIn(false)} />
-	) : (
-		<SignUpForm onSwitchToSignIn={() => setShowSignIn(true)} />
-	);
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPageContent />
+    </Suspense>
+  );
 }
