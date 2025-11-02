@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { AsanaNewProjectModal } from "@/components/asana-new-project-modal";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -36,6 +37,7 @@ export function AsanaSidebar({
 }: AsanaSidebarProps) {
   const [insightsExpanded, setInsightsExpanded] = useState(true);
   const [projectsExpanded, setProjectsExpanded] = useState(true);
+  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
   const navItems = [
     { icon: Home, label: "Home", href: `/0/${currentWorkspaceId}/home` },
@@ -165,6 +167,7 @@ export function AsanaSidebar({
                 <Button
                   className="h-8 text-sm"
                   data-testid="new-project-button"
+                  onClick={() => setShowNewProjectModal(true)}
                   size="sm"
                   variant="outline"
                 >
@@ -185,6 +188,12 @@ export function AsanaSidebar({
           Upgrade
         </Button>
       </div>
+
+      {/* New Project Modal */}
+      <AsanaNewProjectModal
+        isOpen={showNewProjectModal}
+        onClose={() => setShowNewProjectModal(false)}
+      />
     </aside>
   );
 }

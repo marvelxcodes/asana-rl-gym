@@ -3,13 +3,17 @@
 import { useEffect, useState } from "react";
 import { AsanaBoardView } from "@/components/asana-board-view";
 import { AsanaCalendarView } from "@/components/asana-calendar-view";
+import {
+  type FilterType,
+  type GroupType,
+  type SortType,
+  type ViewType,
+} from "@/components/asana-header-exact";
 import { AsanaLayout } from "@/components/asana-layout";
 import { AsanaListViewExact } from "@/components/asana-list-view-exact";
 import { AsanaQuickAddTask } from "@/components/asana-quick-add-task";
 import { AsanaTaskDetailPanel } from "@/components/asana-task-detail-panel";
 import { AsanaTimelineView } from "@/components/asana-timeline-view";
-
-type ViewType = "list" | "board" | "calendar" | "files";
 
 type PageParams = {
   params: Promise<{
@@ -26,11 +30,16 @@ export default function AsanaProjectPage({ params }: PageParams) {
   const [isTaskPanelOpen, setIsTaskPanelOpen] = useState(false);
   const [showQuickAdd, setShowQuickAdd] = useState(false);
   const [projectId, setProjectId] = useState<string>("");
+  const [workspaceId, setWorkspaceId] = useState<string>("");
+  const [currentFilter, setCurrentFilter] = useState<FilterType>("all");
+  const [currentSort, setCurrentSort] = useState<SortType>("none");
+  const [currentGroup, setCurrentGroup] = useState<GroupType>("section");
 
   useEffect(() => {
     params.then((p) => {
       setCurrentView(p.viewType as ViewType);
       setProjectId(p.projectId);
+      setWorkspaceId(p.workspaceId);
     });
   }, [params]);
 
@@ -95,17 +104,25 @@ export default function AsanaProjectPage({ params }: PageParams) {
   return (
     <>
       <AsanaLayout
+        currentProjectId={projectId}
         currentView={currentView}
+        currentWorkspaceId={workspaceId}
         onCustomize={handleCustomize}
+        onFilterChange={setCurrentFilter}
+        onGroupChange={setCurrentGroup}
         onNavigate={handleNavigate}
         onShare={handleShare}
+        onSortChange={setCurrentSort}
         onViewChange={handleViewChange}
         title="My tasks"
       >
         {currentView === "list" && (
           <AsanaListViewExact
+            filter={currentFilter}
+            group={currentGroup}
             onTaskClick={handleTaskClick}
             projectId={projectId}
+            sort={currentSort}
           />
         )}
         {currentView === "board" && (
